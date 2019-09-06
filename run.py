@@ -49,6 +49,14 @@ def check_existing_users(username):
     Function that check if a usaer acc exists using username and return a Boolean
     '''
     return User.user_exist(username)
+    ##########33verifying username before creating new account######
+
+def verify_user(username,password):
+	'''
+	Function that verifies the existance of the user before creating credentials
+	'''
+	checking_user = Credential.check_user(fullname,password)
+	return checking_user
 
 
 
@@ -65,7 +73,7 @@ def main():
 
 
     while True:
-        print('Please enter one of these short code to proceed: ex - for exiting , cua -for creating new user acc if you didnt signup before, log -to login if you already have an account , du -display the users acc list , fu -for finding user account')
+        print('Please enter one of these short code to proceed: \n ex - for exiting ,\n cua -for creating new user acc if you didnt signup before, \n log -to login if you already have an account ,\n du -display the users acc list ,\n fu -for finding user account')
     
         short_code = input().lower()
         if short_code == 'ex':
@@ -93,18 +101,6 @@ def main():
             
             
             print("Please exit the application to log in to see your credentials")
-            print('\n')
-
-        elif short_code =='log':
-            print('Please Fill in the required details')
-            print('\n')
-            # print('Enter your full Name')
-            # fullname=input()
-            
-            print('Enter your user Name')
-            username=input()
-            print('Enter your password')
-            password=input()
             print('\n')
 
         elif short_code == 'du':
@@ -143,6 +139,26 @@ def main():
                 print('That user account does not exist')
                 print('\n')
                 print('\n')
+
+        elif short_code =='log':
+            print('Please Fill in the required details')
+            print('-'*50)
+            print('\n')
+            # print('Enter your full Name')
+            # fullname=input()
+
+            print('To login Enter your user Name')
+            username=input()
+            print('Enter your password')
+            password=str(input())
+            user_exists = verify_user(username,password)
+            if user_exists == 'username':
+                print(' ')
+                print(f'Welcome {username} .Please choose an option to continue')
+                print(' ')
+                while True:
+                    print('-'*50)
+
 
 
         else:
