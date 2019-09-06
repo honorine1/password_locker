@@ -73,7 +73,7 @@ def main():
 
 
     while True:
-        print('Please enter one of these short code to proceed: \n ex - for exiting ,\n cua -for creating new user acc if you didnt signup before, \n log -to login if you already have an account ,\n du -display the users acc list ,\n fu -for finding user account')
+        print('Please enter one of these short code to proceed: \n ex - for exiting \n cua -for creating new user acc if you didnt signup before \n log -to login if you already have an account \n du -display the users acc list \n fu -for finding user account')
     
         short_code = input().lower()
         if short_code == 'ex':
@@ -158,6 +158,9 @@ def main():
                 print(' ')
                 while True:
                     print('-'*50)
+                    print('choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
+					short_code = input('Enter a choice: ').lower().strip()
+					print("-"*60)
 
 
 
