@@ -1,3 +1,5 @@
+import random
+
 class Credential:
     '''
     a class that generates new credential instance
@@ -46,10 +48,16 @@ class Credential:
         ##########method to generate password#######
 
     @classmethod
-    def generate_password(self):
+    def generate_password(cls):
         '''
         A method to generate a credential generate_password
         '''
+
+        passwordlen = 8
+        s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?0123456789"
+        gen_password ="".join (random.sample(s,passwordlen))
+        return gen_password
+
 
 #         @classmethod
 #    def passGenerator(cls):
@@ -60,8 +68,3 @@ class Credential:
     #    passlen = 8
     #    p =  "".join(random.sample(s,passlen ))
     #    return p
-
-        passwordlen = 8
-        s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?0123456789"
-        gen_password=''.join(random.choice(s) for _ in range(8))
-        return gen_pass
