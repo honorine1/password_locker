@@ -1,5 +1,5 @@
 import random
-
+from user import User
 class Credential:
     '''
     a class that generates new credential instance
@@ -43,7 +43,8 @@ class Credential:
         for credential in cls.cred_list:
             if credential.acc_name == acc_name:
                 return credential
-       
+
+   
 
         ##########method to generate password#######
 
@@ -58,13 +59,3 @@ class Credential:
         gen_password ="".join (random.sample(s,passwordlen))
         return gen_password
 
-
-#         @classmethod
-#    def passGenerator(cls):
-#        '''
-#        method that returns the a random password
-#        '''
-    #    s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
-    #    passlen = 8
-    #    p =  "".join(random.sample(s,passlen ))
-    #    return p

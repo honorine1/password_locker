@@ -11,11 +11,11 @@ def create_user(fullname,username,password):
     return new_user
 #######3creating save_users() that is calling the save_user() from User class
 
-def save_users(contact):
+def save_users(user):
     '''
     Function to save user
     '''
-    contact.save_user()
+    user.save_user()
 
     #########del_user() that is calling the delete_user() from User
 
@@ -49,14 +49,45 @@ def check_existing_users(username):
     Function that check if a usaer acc exists using username and return a Boolean
     '''
     return User.user_exist(username)
+  
+def create_credential(acc_name,acc_username,acc_password):
+    '''
+    Function to create a new user acc
+    '''
+    new_credential= Credential(acc_name,acc_username,acc_password)
+    return new_credential
+
+   
+
+def save_credentials(credential):
+    '''
+    Function to save user
+    '''
+    credential.save_credential()
+        #########find_credential() that is calling the find_by_name() from Credential
+
+def find_credential(acc_name):
+   
+    '''
+    Function that finds a user by username and returns the user
+    '''
+    return Credential.find_by_name(acc_name)
+
+        #########display_users() that is calling the display_user() from User
+
+def display_credentialss():
+    '''
+    Function that returns all the saved users
+    '''
+    return Credential.display_credentials()
     ##########33verifying username before creating new account######
 
-def verify_user(username,password):
-	'''
-	Function that verifies the existance of the user before creating credentials
-	'''
-	checking_user = Credential.check_user(fullname,password)
-	return checking_user
+# def verify_user(username,password):
+# 	'''
+# 	Function that verifies the existance of the user before creating credentials
+# 	'''
+# 	checking_user = Credential.auth_users(username,password)
+# 	return checking_user
 
 
 
@@ -98,10 +129,81 @@ def main():
             print('\n')
             print(f'log in details for {username} have been saved')
             print('\n')
-            
-            
-            print("Please exit the application to log in to see your credentials")
+
+
+        elif short_code =='log':
+            print('Please Fill in the required details')
+            print('-'*50)
             print('\n')
+            # print('Enter your full Name')
+            # fullname=input()
+
+            print('To login Enter your user Name')
+            username1=input()
+            if username1 != username:
+                continue
+            else:
+
+                password1=str(input('Enter your password:'))
+                if password1 != password:
+                    continue
+                else:
+            
+                        while True:
+                            print('-'*50)
+                            print('choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
+                            # short_code = input('Enter a choice: ').lower()
+                            short_code = input().lower()
+                            # print('-'*50)
+                            if short_code == 'ex':
+                                print('\n')
+                                print(f'Good bye {username}')
+                                break
+
+                            
+                            elif short_code == 'cc':
+
+                                print('Enter your site name')
+                                acc_name = input()
+                                print('-'*10)
+
+                                print('Your site User name ....')
+                                acc_username = input()
+
+                                
+
+                                print('Your site password ....')
+                                acc_password = input()
+
+                                save_credentials(create_credential( acc_name , acc_username , acc_password ))##create and save new user acc
+                                print('\n')
+                                print(f' in details for {acc_name} have been saved')
+                                print('\n')
+
+                            elif short_code == 'dc':
+                                if display_credentialss():
+                                    
+                                    print('Here is a list of all of your site ')
+                                    print('\n')
+
+                                    for credential in display_credentialss():
+                                        print(f'{credential.acc_name} {credential.acc_username} ..... {credential.acc_password}')
+                                        print('\n')
+
+                                else:
+                                    print('no credential saved yet')
+                                    print('\n')
+
+
+                                
+            
+                                
+
+
+            
+            
+            # print("Please exit the application to log in to see your credentials")
+            # print('\n')
 
         elif short_code == 'du':
             if display_userss():
@@ -140,28 +242,7 @@ def main():
                 print('\n')
                 print('\n')
 
-        elif short_code =='log':
-            print('Please Fill in the required details')
-            print('-'*50)
-            print('\n')
-            # print('Enter your full Name')
-            # fullname=input()
-
-            print('To login Enter your user Name')
-            username=input()
-            print('Enter your password')
-            password=str(input())
-            user_exists = verify_user(username,password)
-            if user_exists == 'username':
-                print(' ')
-                print(f'Welcome {username} .Please choose an option to continue')
-                print(' ')
-                while True:
-                    print('-'*50)
-                    print('choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
-					short_code = input('Enter a choice: ').lower().strip()
-					print("-"*60)
-
+        
 
 
         else:

@@ -68,3 +68,18 @@ class User:
         '''
         return cls.users_list
 
+        #######for checking the existance of users#########3
+
+    @classmethod
+    def auth_users(cls, username, password):
+        '''
+        method that check if username and password are correct
+        '''
+
+        # user = ''
+        for  User in cls.users_list:
+            if(User.username == username and User.password == password):
+                User = User.username
+                return User
+        return 0
+       
