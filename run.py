@@ -81,6 +81,24 @@ def display_credentialss():
     Function that returns all the saved users
     '''
     return Credential.display_credentials()
+
+    ##########delete credential########
+
+   
+
+def del_credential(credential):
+    '''
+    Function to save contact
+    '''
+    credential.delete_credential()
+    ######check existing account#############
+
+def check_existing_credentials(acc_name):
+    '''
+    Function that check if a usaer acc exists using username and return a Boolean
+    '''
+    return Credential.credential_exist(acc_name)
+
     ##########33verifying username before creating new account######
 
 # def verify_user(username,password):
@@ -152,7 +170,7 @@ def main():
             
                         while True:
                             print('-'*50)
-                            print('To continue,choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
+                            print('To continue,choose one short code : \n cc-Create a Credential \n dc-Display Credentials \n delete Credential \n ex-Exit')
                             # short_code = input('Enter a choice: ').lower()
                             short_code = input().lower()
                             # print('-'*50)
@@ -174,22 +192,21 @@ def main():
 
 
                                 print('choose  gn -to generate password or ty -to type your own')
-                                short_code == input().lower()
+                                shortCode = input().lower()
+                                if shortCode =='gn':
+                                    passwordlen = 8
+                                    s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?0123456789"
+                                    pasword ="".join (random.sample(s,passwordlen))
+                                   
+                                    print(f'your password:{pasword}')
+                                
+                                else :
+                                    print('enter your password.....')
+                                    pasword = input()
+                                
+                                    
 
-
-                                if short_code == 'ty':
-                                    print('enter your password')
-                                    acc_password = input()
-
-                                elif short_code == 'gn':
-                                    pswd= "abcdefgijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                                    acc_password = "".join(random.choice(pswd) for _ in range(8))
-
-                                else:
-                                    print('enter the valid password')
-
-
-                                save_credentials(create_credential( acc_name , acc_username , acc_password ))##create and save new user acc
+                                save_credentials(create_credential( acc_name , acc_username , pasword ))##create and save new user acc
                                 print('\n')
                                 print(f'details for {acc_name} have been saved')
                                 print('\n')
@@ -204,25 +221,30 @@ def main():
                                         print(f'{credential.acc_name} {credential.acc_username} ..... {credential.acc_password}')
                                         print('\n')
 
-                                else:
-                                    print('no credential saved yet')
-                                    print('\n')
+                            elif short_code == 'del':
 
+                   
+                                 print('enter the account name  you want to delete')
 
-                                
-            
-                                
+                                 search_acc_name = input()
+                                 if check_existing_credentials(search_acc_name):
+                                    search_credential = find_credential(search_acc_name)
+                                    print(f'{search_credential.acc_name} {search_credential.acc_username}')
+                                    print('-'*20)
+                                    search_credential.delete_credential()
+                                    print(f'{search_credential.acc_name} successfully deleted')
 
+                                 else:
+                                    print('That credential does not exist')
 
-            
-            
-            # print("Please exit the application to log in to see your credentials")
-            # print('\n')
+                            else:
+                                print('no credential saved yet')
+                                print('\n')
 
         elif short_code == 'du':
             if display_userss():
                 
-                print('Here is a list of all of your accounts ')
+                print('Here is a list of all of your users ')
                 print('\n')
 
                 for user in display_userss():
@@ -230,17 +252,17 @@ def main():
                     print('\n')
 
             else:
-                print('no account saved yet')
+                print('no user not saved yet')
                 print('\n')
 
         elif short_code == 'fu':
-            print('Enter username you want to search for')
+            print('Enter user name you want to search for')
 
             search_user = input()
             if check_existing_users(search_user):
 
                 search_user = find_user(search_user)
-                print(f'{search_user.fullname} {search_user.password}')
+                print(f'{search_user.username} {search_user.password}')
                 print('-'*20)
                 print('\n')
 
@@ -261,10 +283,6 @@ def main():
 
         else:
             print('User does not exist please create an account first')
-
-    #    print('Please enter one of these short code to proceed: ex - for exiting , cua -for creating new user acc if you didnt signup before, del -deleting user_acc , log -to login if you already have an account , fu -for finding user , du -display the users acc list')
-          
-
 
 if __name__ == '__main__':
 

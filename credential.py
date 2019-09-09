@@ -45,6 +45,33 @@ class Credential:
                 return credential
 
 
+                ########delete method#####
+
+    def delete_credential(self):
+
+        '''
+        delete_contact method deletes a saved contact from the contact_list
+        '''
+
+        Credential.cred_list.remove(self)
+
+        #########check existing credential#######
+        
+
+    @classmethod
+    def credential_exist(cls,acc_name):
+        '''
+        Method that checks if a credential exists from the cred list.
+        
+        '''
+        for credential in cls.cred_list:
+            if credential.acc_name == acc_name:
+                    return True
+
+        return False
+
+
+
 
         ##########method to generate password#######
 
