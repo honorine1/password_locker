@@ -44,7 +44,7 @@ class Credential:
             if credential.acc_name == acc_name:
                 return credential
 
-   
+
 
         ##########method to generate password#######
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.6
 from user import User
 from credential import Credential
+import random
 
 #########creating  create_user() 
 def create_user(fullname,username,password):
@@ -151,7 +152,7 @@ def main():
             
                         while True:
                             print('-'*50)
-                            print('choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
+                            print('To continue,choose one short code : \n cc-Create a Credential \n dc-Display Credentials  \ gen -generate password \n ex-Exit')
                             # short_code = input('Enter a choice: ').lower()
                             short_code = input().lower()
                             # print('-'*50)
@@ -170,14 +171,27 @@ def main():
                                 print('Your site User name ....')
                                 acc_username = input()
 
-                                
 
-                                print('Your site password ....')
-                                acc_password = input()
+
+                                print('choose  gn -to generate password or ty -to type your own')
+                                short_code == input().lower()
+
+
+                                if short_code == 'ty':
+                                    print('enter your password')
+                                    acc_password = input()
+
+                                elif short_code == 'gn':
+                                    pswd= "abcdefgijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                                    acc_password = "".join(random.choice(pswd) for _ in range(8))
+
+                                else:
+                                    print('enter the valid password')
+
 
                                 save_credentials(create_credential( acc_name , acc_username , acc_password ))##create and save new user acc
                                 print('\n')
-                                print(f' in details for {acc_name} have been saved')
+                                print(f'details for {acc_name} have been saved')
                                 print('\n')
 
                             elif short_code == 'dc':
